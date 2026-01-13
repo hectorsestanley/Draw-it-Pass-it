@@ -25,6 +25,7 @@ A fun multiplayer web game inspired by Chinese Pictionary/Telestrations. Players
 - **Next.js 14** (App Router)
 - **TypeScript**
 - **Tailwind CSS**
+- **Vercel KV** (persistent storage)
 - **Vercel** (deployment)
 - **dnd-kit** (drag & drop)
 
@@ -43,11 +44,22 @@ Deploy to Vercel with one click:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=YOUR_REPO_URL)
 
-### Environment Setup (Optional)
+### Required: Vercel KV Setup
 
-For production, you can optionally configure:
-- **Vercel KV**: For persistent storage (currently using in-memory)
-- **Vercel Blob**: For drawing storage (currently using base64)
+The app requires Vercel KV for persistent storage in production. Follow these steps:
+
+1. Go to your project on Vercel Dashboard
+2. Navigate to the **Storage** tab
+3. Click **Create Database** and select **KV**
+4. Follow the prompts to create your KV database
+5. Vercel will automatically add the required environment variables (`KV_REST_API_URL`, `KV_REST_API_TOKEN`, etc.)
+6. Redeploy your application
+
+**For local development**, the app will automatically use in-memory storage if Vercel KV environment variables are not configured.
+
+### Optional Setup
+
+- **Vercel Blob**: For optimized drawing storage (currently using base64)
 
 ## Development
 
