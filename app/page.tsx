@@ -91,6 +91,15 @@ export default function Home() {
               type="text"
               value={playerName}
               onChange={(e) => setPlayerName(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  if (lobbyCode.trim()) {
+                    joinLobby()
+                  } else {
+                    createLobby()
+                  }
+                }
+              }}
               placeholder="Enter your name"
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white text-lg"
               maxLength={20}
@@ -127,6 +136,11 @@ export default function Home() {
               type="text"
               value={lobbyCode}
               onChange={(e) => setLobbyCode(e.target.value.toUpperCase())}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  joinLobby()
+                }
+              }}
               placeholder="Enter 6-digit code"
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent dark:bg-gray-700 dark:text-white text-lg text-center font-mono tracking-widest"
               maxLength={6}
