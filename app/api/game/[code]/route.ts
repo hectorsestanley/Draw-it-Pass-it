@@ -3,10 +3,11 @@ import { storage } from '@/lib/storage'
 
 export async function GET(
   request: Request,
-  { params }: { params: { code: string } }
+  { params }: { params: Promise<{ code: string }> }
 ) {
   try {
-    const gameState = await storage.getGame(params.code)
+    const { code } = await params
+    const gameState = await storage.getGame(code)
 
     if (!gameState) {
       return NextResponse.json(

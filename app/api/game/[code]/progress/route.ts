@@ -3,13 +3,14 @@ import { storage } from '@/lib/storage'
 
 export async function GET(
   request: Request,
-  { params }: { params: { code: string } }
+  { params }: { params: Promise<{ code: string }> }
 ) {
   try {
+    const { code } = await params
     const { searchParams } = new URL(request.url)
     const playerId = searchParams.get('playerId')
 
-    const progress = await storage.getProgress(params.code)
+    const progress = await storage.getProgress(code)
 
     if (!progress) {
       return NextResponse.json(

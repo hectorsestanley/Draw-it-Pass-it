@@ -5,9 +5,10 @@ import { DrawingEntry } from '@/types/game'
 
 export async function POST(
   request: Request,
-  { params }: { params: { code: string } }
+  { params }: { params: Promise<{ code: string }> }
 ) {
   try {
+    const { code } = await params
     const { playerId, content, type } = await request.json()
 
     if (!playerId || !content || !type) {
@@ -17,9 +18,9 @@ export async function POST(
       )
     }
 
-    const gameState = await storage.getGame(params.code)
-    const lobby = await storage.getLobby(params.code)
-    const progress = await storage.getProgress(params.code)
+    const gameState = await storage.getGame(code)
+    const lobby = await storage.getLobby(code)
+    const progress = await storage.getProgress(code)
 
     if (!gameState || !lobby || !progress) {
       return NextResponse.json(
@@ -86,7 +87,7 @@ export async function POST(
         // Game finished
         gameState.status = 'finished'
         lobby.status = 'finished'
-        await storage.setLobby(params.code, lobby)
+        await storage.setLobby(code, lobby)
       } else {
         // Next round
         gameState.currentRound++
@@ -104,8 +105,8 @@ export async function POST(
       }
     }
 
-    await storage.setGame(params.code, gameState)
-    await storage.setProgress(params.code, progress)
+    await storage.setGame(code, gameState)
+    await storage.setProgress(code, progress)
 
     return NextResponse.json({
       success: true,

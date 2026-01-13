@@ -3,12 +3,13 @@ import { storage } from '@/lib/storage'
 
 export async function POST(
   request: Request,
-  { params }: { params: { code: string } }
+  { params }: { params: Promise<{ code: string }> }
 ) {
   try {
+    const { code } = await params
     const { playerOrder, playerId } = await request.json()
 
-    const lobby = await storage.getLobby(params.code)
+    const lobby = await storage.getLobby(code)
 
     if (!lobby) {
       return NextResponse.json(
@@ -45,7 +46,7 @@ export async function POST(
 
     lobby.playerOrder = playerOrder
 
-    await storage.setLobby(params.code, lobby)
+    await storage.setLobby(code, lobby)
 
     return NextResponse.json({ success: true, lobby })
   } catch (error) {

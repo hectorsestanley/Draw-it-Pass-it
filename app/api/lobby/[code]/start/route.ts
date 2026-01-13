@@ -5,12 +5,13 @@ import { GameState, Pack, PlayerProgress } from '@/types/game'
 
 export async function POST(
   request: Request,
-  { params }: { params: { code: string } }
+  { params }: { params: Promise<{ code: string }> }
 ) {
   try {
+    const { code } = await params
     const { playerId } = await request.json()
 
-    const lobby = await storage.getLobby(params.code)
+    const lobby = await storage.getLobby(code)
 
     if (!lobby) {
       return NextResponse.json(
@@ -52,7 +53,7 @@ export async function POST(
     const totalRounds = lobby.players.length
 
     const gameState: GameState = {
-      lobbyCode: params.code,
+      lobbyCode: code,
       packs,
       currentRound: 1,
       totalRounds,
@@ -70,9 +71,9 @@ export async function POST(
     // Update lobby status
     lobby.status = 'playing'
 
-    await storage.setLobby(params.code, lobby)
-    await storage.setGame(params.code, gameState)
-    await storage.setProgress(params.code, progress)
+    await storage.setLobby(code, lobby)
+    await storage.setGame(code, gameState)
+    await storage.setProgress(code, progress)
 
     return NextResponse.json({ success: true, gameState })
   } catch (error) {
