@@ -84,10 +84,12 @@ export default function Home() {
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 space-y-6">
           {/* Player Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="playerName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Your Name
             </label>
             <input
+              id="playerName"
+              name="playerName"
               type="text"
               value={playerName}
               onChange={(e) => setPlayerName(e.target.value)}
@@ -129,10 +131,12 @@ export default function Home() {
 
           {/* Join Lobby */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="lobbyCode" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Join with Code
             </label>
             <input
+              id="lobbyCode"
+              name="lobbyCode"
               type="text"
               value={lobbyCode}
               onChange={(e) => setLobbyCode(e.target.value.toUpperCase())}
