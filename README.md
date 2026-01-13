@@ -44,14 +44,14 @@ Deploy to Vercel with one click:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=YOUR_REPO_URL)
 
-### Required: Vercel KV Setup
+### Required: Vercel KV Setup (Upstash)
 
 The app requires Vercel KV for persistent storage in production. Follow these steps:
 
 1. Go to your project on Vercel Dashboard
 2. Navigate to the **Storage** tab
-3. Click **Create Database** and select **KV**
-4. Follow the prompts to create your KV database
+3. Click **Create Database** and select **Upstash** (this provides Redis/KV storage)
+4. Follow the prompts to create your Upstash Redis database
 5. Vercel will automatically add the required environment variables (`KV_REST_API_URL`, `KV_REST_API_TOKEN`, etc.)
 6. Redeploy your application
 
