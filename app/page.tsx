@@ -69,7 +69,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-6">
-      <div className="w-full max-w-md space-y-8">
+      <div className="w-full max-w-2xl space-y-6">
         {/* Title */}
         <div className="text-center">
           <h1 className="text-5xl font-bold text-purple-700 dark:text-purple-300 mb-2">
@@ -80,83 +80,103 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Main Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 space-y-6">
-          {/* Player Name */}
-          <div>
-            <label htmlFor="playerName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Your Name
-            </label>
-            <input
-              id="playerName"
-              name="playerName"
-              type="text"
-              value={playerName}
-              onChange={(e) => setPlayerName(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  if (lobbyCode.trim()) {
-                    joinLobby()
-                  } else {
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Create New Game Card */}
+          <div className="bg-gradient-to-br from-purple-50 to-white dark:from-purple-900/20 dark:to-gray-800 rounded-2xl shadow-xl p-8 space-y-6 border-2 border-purple-200 dark:border-purple-700">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-purple-700 dark:text-purple-300 mb-2">
+                Create New Game
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Start a new game and invite friends
+              </p>
+            </div>
+
+            <div>
+              <label htmlFor="createPlayerName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Your Name
+              </label>
+              <input
+                id="createPlayerName"
+                name="createPlayerName"
+                type="text"
+                value={playerName}
+                onChange={(e) => setPlayerName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
                     createLobby()
                   }
-                }
-              }}
-              placeholder="Enter your name"
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white text-lg"
-              maxLength={20}
-            />
-          </div>
-
-          {/* Create Lobby Button */}
-          <button
-            onClick={createLobby}
-            disabled={isCreating}
-            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-4 rounded-lg transition-colors disabled:opacity-50 text-lg"
-          >
-            {isCreating ? 'Creating...' : 'Create New Game'}
-          </button>
-
-          {/* Divider */}
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
+                }}
+                placeholder="Enter your name"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white text-lg"
+                maxLength={20}
+              />
             </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white dark:bg-gray-800 text-gray-500">
-                OR
-              </span>
+
+            <button
+              onClick={createLobby}
+              disabled={isCreating}
+              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-4 rounded-lg transition-colors disabled:opacity-50 text-lg shadow-md"
+            >
+              {isCreating ? 'Creating...' : 'Create Game'}
+            </button>
+          </div>
+
+          {/* Join Game Card */}
+          <div className="bg-gradient-to-br from-pink-50 to-white dark:from-pink-900/20 dark:to-gray-800 rounded-2xl shadow-xl p-8 space-y-6 border-2 border-pink-200 dark:border-pink-700">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-pink-700 dark:text-pink-300 mb-2">
+                Join Game
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Enter a code to join an existing game
+              </p>
             </div>
-          </div>
 
-          {/* Join Lobby */}
-          <div>
-            <label htmlFor="lobbyCode" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Join with Code
-            </label>
-            <input
-              id="lobbyCode"
-              name="lobbyCode"
-              type="text"
-              value={lobbyCode}
-              onChange={(e) => setLobbyCode(e.target.value.toUpperCase())}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  joinLobby()
-                }
-              }}
-              placeholder="Enter 6-digit code"
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent dark:bg-gray-700 dark:text-white text-lg text-center font-mono tracking-widest"
-              maxLength={6}
-            />
-          </div>
+            <div>
+              <label htmlFor="joinPlayerName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Your Name
+              </label>
+              <input
+                id="joinPlayerName"
+                name="joinPlayerName"
+                type="text"
+                value={playerName}
+                onChange={(e) => setPlayerName(e.target.value)}
+                placeholder="Enter your name"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent dark:bg-gray-700 dark:text-white text-lg"
+                maxLength={20}
+              />
+            </div>
 
-          <button
-            onClick={joinLobby}
-            className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-4 rounded-lg transition-colors text-lg"
-          >
-            Join Game
-          </button>
+            <div>
+              <label htmlFor="lobbyCode" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Game Code
+              </label>
+              <input
+                id="lobbyCode"
+                name="lobbyCode"
+                type="text"
+                value={lobbyCode}
+                onChange={(e) => setLobbyCode(e.target.value.toUpperCase())}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    joinLobby()
+                  }
+                }}
+                placeholder="Enter 6-digit code"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent dark:bg-gray-700 dark:text-white text-lg text-center font-mono tracking-widest"
+                maxLength={6}
+              />
+            </div>
+
+            <button
+              onClick={joinLobby}
+              className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-4 rounded-lg transition-colors text-lg shadow-md"
+            >
+              Join Game
+            </button>
+          </div>
         </div>
 
         {/* Instructions */}
