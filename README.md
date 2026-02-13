@@ -1,6 +1,6 @@
 # Draw it, Pass it! 🎨
 
-A fun multiplayer web game inspired by Chinese Pictionary/Telestrations. Players alternate between writing phrases and drawing pictures, creating hilarious chains of misinterpretation!
+A fun multiplayer web game inspired by Telestrations. Players alternate between writing phrases and drawing pictures, creating hilarious chains of misinterpretation!
 
 ## Features
 

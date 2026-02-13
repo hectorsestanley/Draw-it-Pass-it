@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Draw it, Pass it!',
-  description: 'The ultimate Chinese Pictionary game - draw, write, and laugh with friends!',
+  description: 'The ultimate draw-it-pass-it game - draw, write, and laugh with friends!',
 }
 
 export const viewport: Viewport = {
